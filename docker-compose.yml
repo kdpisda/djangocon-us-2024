@@ -47,7 +47,7 @@ services:
     environment:
       POSTGRES_HOST: postgres
       RABBITMQ_DEFAULT_HOST: rabbitmq
-    command: [ "celery", "-A", "astel", "worker", "--loglevel=info", "-Q", "lyrics"]
+    command: [ "celery", "-A", "tutorial", "worker", "--loglevel=info", "-Q", "lyrics"]
     volumes:
       - ./tutorial:/src/tutorial
       - ./utils:/src/utils
