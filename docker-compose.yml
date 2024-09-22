@@ -26,17 +26,13 @@ services:
     environment:
       POSTGRES_HOST: postgres
       RABBITMQ_DEFAULT_HOST: rabbitmq
-    command: ["bash", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     ports:
       - "8000:8000"
     volumes:
-      - ./accounting:/src/accounting
-      - ./analytics:/src/analytics
-      - ./bitwise:/src/bitwise
-      - ./crm:/src/crm
-      - ./documents:/src/documents
+      - ./cms:/src/cms
       - ./iam:/src/iam
-      - ./notification:/src/notification
+      - ./tutorial:/src/tutorial
       - ./utils:/src/utils
       - ./static:/src/static
       - ./media:/src/media
