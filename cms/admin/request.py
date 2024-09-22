@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from utils.external.musix import MusixMatchClient
+
 
 class RequestAdmin(admin.ModelAdmin):
     list_display = ("artist", "track", "song", "user", "status")
@@ -13,9 +15,10 @@ class RequestAdmin(admin.ModelAdmin):
         return ("artist", "track")  # fields shown on the add form
 
     def fetch_lyrics(self, request, queryset):
+        musix = MusixMatchClient()
         for obj in queryset:  # noqa
-            # TODO: add task to get lyrics
-            pass
+            response = musix.get_lyrics(obj.artist, obj.track)
+            print(response)
 
     fetch_lyrics.short_description = "Fetch Lyrics for selected requests"
     actions = [fetch_lyrics]
