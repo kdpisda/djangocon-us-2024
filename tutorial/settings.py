@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "iam",
     "cms",
     "rest_framework",
@@ -137,19 +138,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "iam.User"
-
-CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "django-db")
-CELERY_CACHE_BACKEND = os.getenv("CELERY_CACHE_BACKEND", "django-cache")
-
-RABBITMQ_DEFAULT_USER = os.getenv("RABBITMQ_DEFAULT_USER")
-RABBITMQ_DEFAULT_PASS = os.getenv("RABBITMQ_DEFAULT_PASS")
-RABBITMQ_DEFAULT_VHOST = os.getenv("RABBITMQ_DEFAULT_VHOST")
-RABBITMQ_DEFAULT_HOST = os.getenv("RABBITMQ_DEFAULT_HOST")
-RABBITMQ_DEFAULT_PORT = os.getenv("RABBITMQ_DEFAULT_PORT")
-
-CELERY_BROKER_URL = (
-    f"amqp://{RABBITMQ_DEFAULT_USER}:{RABBITMQ_DEFAULT_PASS}@"  # noqa
-    f"{RABBITMQ_DEFAULT_HOST}:{RABBITMQ_DEFAULT_PORT}/{RABBITMQ_DEFAULT_VHOST}"  # noqa
-)
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
