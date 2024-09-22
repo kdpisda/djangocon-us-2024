@@ -1,5 +1,4 @@
 from django.contrib import admin
-from summarizer.requests.tasks.get_lyrics import get_lyrics
 
 
 class RequestAdmin(admin.ModelAdmin):
@@ -14,8 +13,9 @@ class RequestAdmin(admin.ModelAdmin):
         return ("artist", "track")  # fields shown on the add form
 
     def fetch_lyrics(self, request, queryset):
-        for obj in queryset:
-            get_lyrics.delay(obj.id)  # Call the get_lyrics method as a Celery task
+        for obj in queryset:  # noqa
+            # TODO: add task to get lyrics
+            pass
 
     fetch_lyrics.short_description = "Fetch Lyrics for selected requests"
     actions = [fetch_lyrics]
