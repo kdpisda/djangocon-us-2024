@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tutorial-djangocon-us-2024"
+version = "0.1.0"
+description = "Efficient Django: Mastering Asynchronous Tasks with Celery, RabbitMQ, and Redis"
+authors = ["Kuldeep Pisda <hello@kdpisda.in>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.1.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
