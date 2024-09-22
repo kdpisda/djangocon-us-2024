@@ -17,6 +17,8 @@ class RequestAdmin(admin.ModelAdmin):
     def fetch_lyrics(self, request, queryset):
         musix = MusixMatchClient()
         for obj in queryset:  # noqa
+            response = musix.get_track(obj.artist, obj.track)
+            print(response)
             response = musix.get_lyrics(obj.artist, obj.track)
             print(response)
 
