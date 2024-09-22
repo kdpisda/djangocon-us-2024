@@ -1,0 +1,48 @@
+services:
+  rabbitmq:
+    image: "rabbitmq:latest"
+    ports:
+      - "5672:5672"
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:15.6
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  djangocon:
+    build: .
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      RABBITMQ_DEFAULT_HOST: rabbitmq
+    command: ["bash", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./accounting:/src/accounting
+      - ./analytics:/src/analytics
+      - ./bitwise:/src/bitwise
+      - ./crm:/src/crm
+      - ./documents:/src/documents
+      - ./iam:/src/iam
+      - ./notification:/src/notification
+      - ./utils:/src/utils
+      - ./static:/src/static
+      - ./media:/src/media
+    depends_on:
+      - postgres
+      - rabbitmq
+
+volumes:
+  postgres-data:
