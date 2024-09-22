@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "celery",
     "auditlog",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
